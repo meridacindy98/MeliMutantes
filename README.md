@@ -2,45 +2,22 @@
 
 Ejercicio práctico para MercadoLibre. 
 
-Se puede ver una version estable del proyecto aqui:
-
-- [servicio es mutante](http://ec2-13-58-238-161.us-east-2.compute.amazonaws.com:4567/mutants/).
-- [servicio estadisticas](http://ec2-13-58-238-161.us-east-2.compute.amazonaws.com:4567/stats)
-
-![Magneto_image](doc/images/magneto.jpg)
-
-- [Ejercicio](#ejercicio)
-  - [Especificaciones](#especificaciones)
-  - [Implementación y tecnologias usadas](#implementaci%C3%B3n-y-tecnologias-usadas)
-  - [Comentarios relevantes](#comentarios-relevantes)
-- [Setup](#setup)
-  - [Instrucciones](#instrucciones)
-  - [Uso](#uso)
-  - [API Url](#api)
-  - [Servicios](#servicios)
-    - [Es mutante](#es-mutante)
-    - [Estadisticas](#estadisticas)
-- [Test](#test)
-  - [Automaticos](#automaticos)
-  - [Scripts](#scripts)
-  - [Cobertura](#cobertura)
-
-## Ejercicio
+## Objetivo
 
 ### Especificaciones
 
-Los archivos correspondientes a la especificación del ejercicio se encuentran en la carpeta `spec`. Dentro de ella
-se encuentra [un pdf](./spec/Examen%20Mercadolibre%202017.pdf) que describe la funcionalidades y requisitos esperados
-que contenga el proyecto.
+Detectar si un ADN es mutante o no usando como input una secuencia de 6 cadenas de ADN. Esto se da cuando se encuentra mas de una secuencia de 4 caracteres iguales, ya sea de manera horizontal asi como vertical o diagonalmente.
+
+Los caracteres validos son A, T, G y C, los cuales representan cada base nitrogenada del ADN.
 
 ### Implementacion y tecnologias usadas
 
-- [SparkJava](http://sparkjava.com)
-- [MongoDB](https://www.mongodb.com)
-- [Morphia](https://mongodb.github.io/morphia/)
-- [Gson](https://github.com/google/gson)
-- [Log4j](https://logging.apache.org/log4j/2.x/)
-- [jUnit](http://junit.org/junit5/)
+- Java 8
+- H2
+- MySQL 
+- Maven
+- Spring Boot 
+- Junit
 
 ### Comentarios relevantes
 Cuando comence a realizar el ejercicio no estaba familiarizado con SparkJava, por lo que tuve la oportunidad de aprender
