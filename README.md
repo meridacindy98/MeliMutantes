@@ -24,5 +24,5 @@ poner link del swager desployado
 * https://melimutantes.herokuapp.com
 
 ## Servicios
-* [Servicio mutant](doc/serviceMutant.md) : `GET /unit/`
-* [Servicio stat](doc/serviceStats.md) : `POST /unit/`
+* [Servicio mutant](doc/serviceMutant.md) : `POST/mutant/`
+* [Servicio stat](doc/serviceStats.md) : `GET/stats/`
