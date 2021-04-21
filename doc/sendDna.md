@@ -7,10 +7,9 @@ Recibe como parámetro una secuencia de ADN, representada por un array de string
 **Método** : `POST`
 
 **Posibles respuestas** :  
-
-     200: El humano es mutante. 
-     403: El humano no es mutante.
-     400: Input incorrecto. 
+     - 200: El humano es mutante. 
+     - 403: El humano no es mutante.
+     - 400: Input incorrecto. 
 
 **Ejemplo body:**
 ```json
