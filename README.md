@@ -17,7 +17,12 @@ Los caracteres validos son A, T, G y C, los cuales representan cada base nitroge
 - Spring Boot 
 - Junit
 
+## Documentación:
+poner link del swager desployado
+
 ## Host API :computer:
 * https://melimutantes.herokuapp.com
 
 ## Servicios
+* [Servicio mutant](doc/serviceMutant.md) : `GET /unit/`
+* [Servicio stat](doc/serviceStats.md) : `POST /unit/`
