@@ -2,7 +2,7 @@
 
 Recibe como parámetro una secuencia de ADN, representada por un array de strings, y responde si la misma pertenece, o no, a un mutante. Se almacena la secuencia consultada en una base de datos, con el propósito de obtener estadísticas.
 
-**URL** : `/mutant`
+**URL** : `https://melimutantes.herokuapp.com/mutant`
 
 **Método** : `POST`
 
