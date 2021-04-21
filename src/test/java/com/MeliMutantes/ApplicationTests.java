@@ -1,5 +1,6 @@
 package com.MeliMutantes;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -45,17 +46,19 @@ class ApplicationTests {
 									   "CTATGGGG",
 									   "CTAGCAAT"} ;
 
-	   assertFalse(mutantService.analyzeDna(dna));
+		assertThatThrownBy(() -> mutantService.analyzeDna(dna)).isInstanceOf(IllegalArgumentException.class)
+		.hasMessage("Invalid dna. The length and height must be bigger than 3 and equals.");
 	}
 		
 	@Test
 	public void isFormatDnaColWrong() {
 		String [] dna = new String[]  {"ATG",
-									   "CTATGGGG",
-									   "CTAGCAAT",
-									   "ATGATCTA"} ;
+									   "CTAT",
+									   "CTAG",
+									   "ATGA"} ;
 
-	   assertFalse(mutantService.validateDna(dna));
+		assertThatThrownBy(() -> mutantService.analyzeDna(dna)).isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Invalid dna. The length and height must be bigger than 3 and equals.");
 	}	
 	
 	@Test
@@ -65,8 +68,27 @@ class ApplicationTests {
 									   "CTAGCAAT",
 									   "ATGATCTA"} ;
 
-	   assertFalse(mutantService.validateDna(dna));
+		assertThatThrownBy(() -> mutantService.analyzeDna(dna)).isInstanceOf(IllegalArgumentException.class)
+		.hasMessage("Invalid dna. The length and height must be bigger than 3 and equals.");
 	}	
+	
+	@Test
+	public void dnaErrorNumber() {
+		String [] dna = new String[]  {"ATGAAA12",
+									   "CTATGGGG",
+									   "CTAGCAAT",
+									   "ATGATCTA"} ;
+
+		assertThatThrownBy(() -> mutantService.analyzeDna(dna)).isInstanceOf(IllegalArgumentException.class)
+		.hasMessage("Invalid dna. The DNA sequence must be conformed by the values A, T, C or G only.");
+	}	
+	
+	@Test
+	public void dnaNull() {
+		assertThatThrownBy(() -> mutantService.analyzeDna(null)).isInstanceOf(IllegalArgumentException.class)
+		.hasMessage("Dna null.");
+	}	
+	
 	
 	private List<String[]> makeMutanTestTrue(){
 		List<String[]> mutantTest = new ArrayList<String[]>();

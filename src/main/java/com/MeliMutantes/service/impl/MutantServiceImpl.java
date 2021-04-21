@@ -3,6 +3,7 @@ package com.MeliMutantes.service.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -24,7 +25,9 @@ public class MutantServiceImpl implements MutantService {
 	private DnaDao dnaDao;
 	
 	public boolean analyzeDna(String[] dna) {
-
+		
+			validateDna(dna);
+			
 			boolean isMutant = isMutant(dna);		
 			String stringDna = Arrays.stream(dna).collect(Collectors.joining(""));
 			
@@ -39,17 +42,22 @@ public class MutantServiceImpl implements MutantService {
 		
 	}
 	
-	public boolean validateDna(String[] dna) {
-
-		long rows = Arrays.stream(dna).count();
-		boolean columns = Arrays.stream(dna).allMatch(row -> row.length() >= 4 && row.length() == rows);
+	public void validateDna(String[] dna) {		
 		
-		if (rows >= 4 && columns) {
-			return true;
+		if( dna == null ) {
+			throw new IllegalArgumentException("Dna null.");
 		}
 		
-		log.info("Error Dna format. The length and height must be bigger than 3.");
-		return false;
+		long rows = Arrays.stream(dna).count();
+		
+		if( !Arrays.stream(dna).allMatch(row -> row.matches("^[ATCG]*$")) ) {
+			 throw new IllegalArgumentException("Invalid dna. The DNA sequence must be conformed by the values A, T, C or G only.");
+		}
+		
+		if( !Arrays.stream(dna).allMatch(row -> row.length() >= 4 && row.length() == rows ) ) {
+			 throw new IllegalArgumentException("Invalid dna. The length and height must be bigger than 3 and equals.");
+		}					
+		
 	}
 
 	private boolean isMutant(String[] dna) {
