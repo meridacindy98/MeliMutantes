@@ -1,21 +1,26 @@
-# Ejercicio Mutantes - Mercadolibre :boom:
+# Servicio mutant
 
-Ejercicio práctico para MercadoLibre. 
+Recibe como parámetro una secuencia de ADN, representada por un array de strings, y responde si la misma pertenece, o no, a un mutante. Se almacena la secuencia consultada en una base de datos, con el propósito de obtener estadísticas.
 
-## Objetivo
+**URL** : `https://melimutantes.herokuapp.com/mutant`
 
-Detectar si un ADN es mutante o no usando como input una secuencia de 6 cadenas de ADN. Esto se da cuando se encuentra mas de una secuencia de 4 caracteres iguales, ya sea de manera horizontal asi como vertical o diagonalmente.
+**Método** : `POST`
 
-Los caracteres validos son A, T, G y C, los cuales representan cada base nitrogenada del ADN.
+**Ejemplo body:**
+```json
+{
+  "dna":["ATGCGA",
+         "CAGTGC",
+         "TTATGT",
+         "AGAAGG",
+         "CCCCTA",
+         "TCACTG"]
+}
+```
 
-## Implementacion y tecnologias usadas
+**Posibles respuestas** :  
 
-- Java 8
-- H2
-- MySQL 
-- Maven
-- Spring Boot 
-- Junit
+  - 200: El humano es mutante. 
+  - 403: El humano no es mutante.
+  - 400: Input incorrecto. 
 
-## Host API :computer:
-* https://melimutantes.herokuapp.com
