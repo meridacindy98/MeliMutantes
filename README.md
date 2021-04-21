@@ -10,7 +10,7 @@ Detectar si un ADN es mutante o no usando como input una secuencia de 6 cadenas 
 
 Los caracteres validos son A, T, G y C, los cuales representan cada base nitrogenada del ADN.
 
-### Implementacion y tecnologias usadas
+## Implementacion y tecnologias usadas
 
 - Java 8
 - H2
@@ -18,16 +18,6 @@ Los caracteres validos son A, T, G y C, los cuales representan cada base nitroge
 - Maven
 - Spring Boot 
 - Junit
-
-### Comentarios relevantes
-Cuando comence a realizar el ejercicio no estaba familiarizado con SparkJava, por lo que tuve la oportunidad de aprender
-los conceptos basicos de este framework utilizando la [documentacion oficial de sparkjava](http://sparkjava.com/documentation) y 
-[tutoriales](http://sparkjava.com/tutorials/).
-
-Tampoco estaba familiarizado con [Morphia](https://mongodb.github.io/morphia/) para el mapeo Object/Document, utilice 
-tambien la [documentacion oficial](http://mongodb.github.io/morphia/1.3/) y la 
-[documentacion de la API](http://mongodb.github.io/morphia/1.3/javadoc/).
-
 
 ## Setup
 
