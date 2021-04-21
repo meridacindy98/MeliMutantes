@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.MeliMutantes.service.MutantService;
-import com.MeliMutantes.service.StatService;
 
 @SpringBootTest
 class ApplicationTests {

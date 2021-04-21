@@ -27,7 +27,7 @@ public class MutantController {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 			}
 		} catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}		
 	
 	}
