@@ -87,7 +87,7 @@ class ApplicationTests {
 	@Test
 	public void dnaNull() {
 		assertThatThrownBy(() -> mutantService.analyzeDna(null)).isInstanceOf(IllegalArgumentException.class)
-		.hasMessage("Dna null.");
+		.hasMessage("Dna null or empty.");
 	}	
 	
 	

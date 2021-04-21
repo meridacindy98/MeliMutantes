@@ -44,8 +44,8 @@ public class MutantServiceImpl implements MutantService {
 	
 	public void validateDna(String[] dna) {		
 		
-		if( dna == null ) {
-			throw new IllegalArgumentException("Dna null.");
+		if( dna == null || dna.length == 0 ) {
+			throw new IllegalArgumentException("Dna null or empty.");
 		}
 		
 		long rows = Arrays.stream(dna).count();
