@@ -20,11 +20,15 @@ public class MutantController {
 	@PostMapping(path = "/mutant", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> isMutant(@RequestBody DnaSequence dna) {
 
+		try {
 			if (mutantService.analyzeDna(dna.getDna())) {
 				return ResponseEntity.ok("OK");
 			} else {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 			}
+		} catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+		}		
 	
 	}
 

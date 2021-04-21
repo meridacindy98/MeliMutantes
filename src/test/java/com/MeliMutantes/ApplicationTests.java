@@ -74,10 +74,12 @@ class ApplicationTests {
 	
 	@Test
 	public void dnaErrorNumber() {
-		String [] dna = new String[]  {"ATGAAA12",
-									   "CTATGGGG",
-									   "CTAGCAAT",
-									   "ATGATCTA"} ;
+		String [] dna = new String[]  {"ATGAA1",
+								       "CAGTGC",
+								       "TTATGT",
+								       "AGAAGG",
+								       "CCCCTA",
+								       "TCACTG"} ;
 
 		assertThatThrownBy(() -> mutantService.analyzeDna(dna)).isInstanceOf(IllegalArgumentException.class)
 		.hasMessage("Invalid dna. The DNA sequence must be conformed by the values A, T, C or G only.");
