@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/amcomaschi/mutants.svg?branch=master)](https://travis-ci.org/amcomaschi/mutants)
-[![codecov](https://codecov.io/gh/amcomaschi/mutants/branch/master/graph/badge.svg)](https://codecov.io/gh/amcomaschi/mutants)
-# Ejercicio Mutantes - Mercadolibre
+# Ejercicio Mutantes - Mercadolibre :boom:
 
 Ejercicio práctico para MercadoLibre. 
 
