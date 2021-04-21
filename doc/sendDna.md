@@ -4,7 +4,7 @@
 
 **Método** : `POST`
 
-**Ejemplo:**
+**Ejemplo body:**
 ```json
 {
   "dna":["ATGCGA",
