@@ -8,29 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-//@Table(name = "dna")
+@Table(name="dna")
 public class Dna {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String dna;
 	
-	//@Column(name="is_mutant")
-	private boolean isMutant;
+	@Column(name = "is_Mutant")
+	private Boolean isMutant;
 
-	public Dna() {}
+	public Dna() {}	
+	
 
-	public Dna(String dna, boolean isMutant) {
+	public Dna(String dna, Boolean isMutant) {
 		this.dna = dna;
 		this.isMutant = isMutant;
 	}
 
-	public int getId() {
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -42,12 +45,14 @@ public class Dna {
 		this.dna = dna;
 	}
 
-	public boolean isMutant() {
+	public Boolean getIsMutant() {
 		return isMutant;
 	}
 
-	public void setMutant(boolean isMutant) {
+	public void setIsMutant(Boolean isMutant) {
 		this.isMutant = isMutant;
 	}
+
+
 
 }
