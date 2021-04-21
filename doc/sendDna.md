@@ -7,5 +7,10 @@
 **Ejemplo:**
 ```json
 {
-“dna”:["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
+  "dna":["ATGCGA",
+         "CAGTGC",
+         "TTATGT",
+         "AGAAGG",
+         "CCCCTA",
+         "TCACTG"]
 }
