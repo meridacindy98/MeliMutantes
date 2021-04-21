@@ -1,26 +1,17 @@
-# Servicio mutant
+# Servicio stats
 
-Recibe como parámetro una secuencia de ADN, representada por un array de strings, y responde si la misma pertenece, o no, a un mutante. Se almacena la secuencia consultada en una base de datos, con el propósito de obtener estadísticas.
+Devuelve las estadisticas de la cantidad de mutantes y humanos que existen en la base de datos.
 
-**URL** : `https://melimutantes.herokuapp.com/mutant`
+**URL** : `https://melimutantes.herokuapp.com/stats`
 
-**Método** : `POST`
+**Método** : `GET`
 
-**Ejemplo body:**
+**Ejemplo de respuesta** :  
+
 ```json
 {
-  "dna":["ATGCGA",
-         "CAGTGC",
-         "TTATGT",
-         "AGAAGG",
-         "CCCCTA",
-         "TCACTG"]
+  "count_mutant_dna": 1,
+  "count_human_dna": 0,
+  "ratio": 1.0
 }
 ```
-
-**Posibles respuestas** :  
-
-  - 200: El humano es mutante. 
-  - 403: El humano no es mutante.
-  - 400: Input incorrecto. 
-
