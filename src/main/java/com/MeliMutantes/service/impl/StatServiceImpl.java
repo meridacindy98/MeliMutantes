@@ -14,6 +14,7 @@ public class StatServiceImpl implements StatService {
 	private DnaDao dnaDao;
 
 	public Stat calculateStat() {		
+		
 		long dnaMutant = dnaDao.countByIsMutant(true);
 		long dnaHuman = dnaDao.countByIsMutant(false);
 

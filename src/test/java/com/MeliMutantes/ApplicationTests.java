@@ -47,7 +47,7 @@ class ApplicationTests {
 
 	   assertFalse(mutantService.analyzeDna(dna));
 	}
-	
+		
 	@Test
 	public void isFormatDnaColWrong() {
 		String [] dna = new String[]  {"ATG",

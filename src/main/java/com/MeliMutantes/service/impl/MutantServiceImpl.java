@@ -24,18 +24,18 @@ public class MutantServiceImpl implements MutantService {
 	private DnaDao dnaDao;
 	
 	public boolean analyzeDna(String[] dna) {
-		
+
 		if(validateDna(dna)) {
 			boolean isMutant = isMutant(dna);		
 			String stringDna = Arrays.stream(dna).collect(Collectors.joining(""));
 			
 			if (dnaDao.findByDna(stringDna) == null) {
 				dnaDao.save( new Dna(stringDna, isMutant) );
-				log.info("Saved dna: " + dna );
+				log.info("Saved dna" );
 			} else {
-	            log.info("Dna " + dna + " already exist in the data base");
+	            log.info("Dna already exist in the data base");
 			}		
-			
+
 			return isMutant;
 		}else {
 			return false;
@@ -47,7 +47,7 @@ public class MutantServiceImpl implements MutantService {
 
 		long rows = Arrays.stream(dna).count();
 		boolean columns = Arrays.stream(dna).allMatch(row -> row.length() >= 4);
-
+		
 		if (rows >= 4 && columns) {
 			return true;
 		}
