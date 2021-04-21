@@ -25,7 +25,6 @@ public class MutantServiceImpl implements MutantService {
 	
 	public boolean analyzeDna(String[] dna) {
 
-		if(validateDna(dna)) {
 			boolean isMutant = isMutant(dna);		
 			String stringDna = Arrays.stream(dna).collect(Collectors.joining(""));
 			
@@ -37,16 +36,13 @@ public class MutantServiceImpl implements MutantService {
 			}		
 
 			return isMutant;
-		}else {
-			return false;
-		}
 		
 	}
 	
-	private boolean validateDna(String[] dna) {
+	public boolean validateDna(String[] dna) {
 
 		long rows = Arrays.stream(dna).count();
-		boolean columns = Arrays.stream(dna).allMatch(row -> row.length() >= 4);
+		boolean columns = Arrays.stream(dna).allMatch(row -> row.length() >= 4 && row.length() == rows);
 		
 		if (rows >= 4 && columns) {
 			return true;

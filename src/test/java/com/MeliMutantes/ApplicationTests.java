@@ -56,7 +56,17 @@ class ApplicationTests {
 									   "ATGATCTA"} ;
 
 	   assertFalse(mutantService.analyzeDna(dna));
-	}		
+	}	
+	
+	@Test
+	public void rowsAndColumnsNoEquals() {
+		String [] dna = new String[]  {"ATGA",
+									   "CTATGGGG",
+									   "CTAGCAAT",
+									   "ATGATCTA"} ;
+
+	   assertFalse(mutantService.analyzeDna(dna));
+	}	
 	
 	private List<String[]> makeMutanTestTrue(){
 		List<String[]> mutantTest = new ArrayList<String[]>();
@@ -87,16 +97,6 @@ class ApplicationTests {
 									   "CAAG",
 									   "ATAA"} );
 		
-		//18X18
-		mutantTest.add( new String[]  {"ATGATCTATATGGGGA",
-									   "CTATGGGGATGATCTA",
-									   "CTAGCAATGGTTATAG",
-									   "CTAATGCTATGATCTA",
-									   "CAAAAAGCAGGGTTAT",
-									   "AGGGTTATAGGGTTAT",
-									   "ATGGGTAAATGATCTA",
-									   "ACAGGTAAGTAAATGA"} );	
-
 		return mutantTest;
 	}
 	
@@ -127,17 +127,7 @@ class ApplicationTests {
 		mutantTest.add( new String[]  {"ATGA",
 									   "CATT",
 									   "CAAG",
-									   "ATAA"} );
-		
-		//18X18
-		mutantTest.add( new String[]  {"ATCGATCGATCGATCG",
-									   "TGCATGAATGCATGAA",
-									   "ATAGATCGATAGATCG",
-									   "TGCATGAATGCATGAA",
-									   "ATCGATCGATCGATCG",
-									   "TGAATGAATGAATGAA",
-									   "ATCGATCGATCGATCG",
-									   "TGCATGCATGCATGCA"} );	
+									   "ATAA"} );		
 
 		return mutantTest;
 			

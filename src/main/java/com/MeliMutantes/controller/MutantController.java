@@ -13,18 +13,23 @@ import com.MeliMutantes.service.MutantService;
 
 @RestController
 public class MutantController {
-	
+
 	@Autowired
 	private MutantService mutantService;
 
 	@PostMapping(path = "/mutant", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> isMutant( @RequestBody DnaSequence dna ){
-		
-		if (mutantService.analyzeDna(dna.getDna())) {
-			return ResponseEntity.ok("OK");
+	public ResponseEntity<String> isMutant(@RequestBody DnaSequence dna) {
+
+		if (mutantService.validateDna(dna.getDna())) {
+			if (mutantService.analyzeDna(dna.getDna())) {
+				return ResponseEntity.ok("OK");
+			} else {
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+			}
 		} else {
-			  return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-		}		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+
 	}
-	
+
 }
