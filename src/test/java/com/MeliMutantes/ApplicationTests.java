@@ -55,7 +55,7 @@ class ApplicationTests {
 									   "CTAGCAAT",
 									   "ATGATCTA"} ;
 
-	   assertFalse(mutantService.analyzeDna(dna));
+	   assertFalse(mutantService.validateDna(dna));
 	}	
 	
 	@Test
@@ -65,7 +65,7 @@ class ApplicationTests {
 									   "CTAGCAAT",
 									   "ATGATCTA"} ;
 
-	   assertFalse(mutantService.analyzeDna(dna));
+	   assertFalse(mutantService.validateDna(dna));
 	}	
 	
 	private List<String[]> makeMutanTestTrue(){
