@@ -22,7 +22,7 @@ Los caracteres validos son A, T, G y C, los cuales representan cada base nitroge
 * [Servicio mutant](doc/serviceMutant.md) : `POST/mutant/`
 * [Servicio stat](doc/serviceStats.md) : `GET/stats/`
 
-#### Cobertura
+## Cobertura
 
 Ejecutando los test localmente con la herramienta Jacoco.
 
