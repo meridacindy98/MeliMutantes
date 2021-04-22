@@ -1,8 +1,10 @@
 package com.MeliMutantes;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +13,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.MeliMutantes.model.Stat;
 import com.MeliMutantes.service.MutantService;
+import com.MeliMutantes.service.StatService;
 
 @SpringBootTest
 class ApplicationTests {
 
 	@Autowired
-	private MutantService mutantService;	
-
+	private MutantService mutantService;
+	
+	@Autowired
+	private StatService statService;	
+	
 	@Test
 	public void isMutantTrue() {
 		
@@ -88,7 +95,17 @@ class ApplicationTests {
 	public void dnaNull() {
 		assertThatThrownBy(() -> mutantService.analyzeDna(null)).isInstanceOf(IllegalArgumentException.class)
 		.hasMessage("Dna null or empty.");
-	}	
+	}
+	
+	@Test
+	public void getStats() {		
+	Stat s = statService.calculateStat();
+	assertEquals(2, s.getCount_mutant_dna());
+	assertEquals(5, s.getCount_human_dna());	
+	assertTrue( s.getRatio() == 0.4f );
+	
+	}
+	
 	
 	
 	private List<String[]> makeMutanTestTrue(){
@@ -102,18 +119,7 @@ class ApplicationTests {
 									   "GAAGTAGC",
 									   "AGGGTTAT",
 									   "ATGGGTAA",
-									   "ACAGGTAA"} );
-		
-		//7x7
-		mutantTest.add( new String[]  {"ATGATCTA",
-									   "CTATGGGG",
-									   "CTAGCAAT",
-									   "CTAATGCT",
-									   "GAAGTAGC",
-									   "AGGGTTAT",
-									   "ATGGGTAA",
-									   "ACAGGTAA"} );
-		
+									   "ACAGGTAA"} );		
 		//4x4
 		mutantTest.add( new String[]  {"ATGA",
 									   "CAAT",
