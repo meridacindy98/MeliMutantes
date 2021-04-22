@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutantServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.MeliMutantes.service.impl</a> &gt; <span class="el_source">MutantServiceImpl.java</span></div><h1>MutantServiceImpl.java</h1><pre class="source lang-java linenums">package com.MeliMutantes.service.impl;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.MeliMutantes.dao.DnaDao;
+import com.MeliMutantes.entity.Dna;
+import com.MeliMutantes.service.MutantService;
+
+@Service
+<span class="fc" id="L19">public class MutantServiceImpl implements MutantService {</span>
+
+<span class="fc" id="L21">	private static final Logger log = LoggerFactory.getLogger(MutantService.class);</span>
+<span class="fc" id="L22">	private static final List&lt;String&gt; DNA = Arrays.asList(&quot;AAAA&quot;, &quot;CCCC&quot;, &quot;GGGG&quot;, &quot;TTTT&quot;);</span>
+	
+	@Autowired
+	private DnaDao dnaDao;
+	
+	public boolean analyzeDna(String[] dna) {
+		
+<span class="fc" id="L29">			validateDna(dna);</span>
+			
+<span class="fc" id="L31">			boolean isMutant = isMutant(dna);		</span>
+<span class="fc" id="L32">			String stringDna = Arrays.stream(dna).collect(Collectors.joining(&quot;&quot;));</span>
+			
+<span class="fc bfc" id="L34" title="All 2 branches covered.">			if (dnaDao.findByDna(stringDna) == null) {</span>
+<span class="fc" id="L35">				dnaDao.save( new Dna(stringDna, isMutant) );</span>
+<span class="fc" id="L36">				log.info(&quot;Saved dna&quot; );</span>
+			} else {
+<span class="fc" id="L38">	            log.info(&quot;Dna already exist in the data base&quot;);</span>
+			}		
+
+<span class="fc" id="L41">			return isMutant;</span>
+		
+	}
+	
+	public void validateDna(String[] dna) {		
+		
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">		if( dna == null || dna.length == 0 ) {</span>
+<span class="fc" id="L48">			throw new IllegalArgumentException(&quot;Dna null or empty.&quot;);</span>
+		}
+		
+<span class="fc" id="L51">		long rows = Arrays.stream(dna).count();</span>
+		
+<span class="fc bfc" id="L53" title="All 2 branches covered.">		if( !Arrays.stream(dna).allMatch(row -&gt; row.matches(&quot;^[ATCG]*$&quot;)) ) {</span>
+<span class="fc" id="L54">			 throw new IllegalArgumentException(&quot;Invalid dna. The DNA sequence must be conformed by the values A, T, C or G only.&quot;);</span>
+		}
+		
+<span class="fc bfc" id="L57" title="All 6 branches covered.">		if( !Arrays.stream(dna).allMatch(row -&gt; row.length() &gt;= 4 &amp;&amp; row.length() == rows ) ) {</span>
+<span class="fc" id="L58">			 throw new IllegalArgumentException(&quot;Invalid dna. The length and height must be bigger than 3 and equals.&quot;);</span>
+		}					
+		
+<span class="fc" id="L61">	}</span>
+
+	private boolean isMutant(String[] dna) {
+		
+<span class="fc" id="L65">		int countDnaMutant = 0;</span>
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">		for (String iteamDNA : DNA) {</span>
+
+<span class="fc" id="L69">			countDnaMutant += Arrays.asList(dna).stream().filter(word -&gt; word.contains(iteamDNA))</span>
+<span class="fc" id="L70">					.collect(Collectors.toList()).size();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">			if (countDnaMutant &gt; 1)</span>
+<span class="fc" id="L72">				return true;</span>
+
+<span class="fc" id="L74">			countDnaMutant += GetWordsVertical(dna).stream().filter(word -&gt; word.contains(iteamDNA))</span>
+<span class="fc" id="L75">					.collect(Collectors.toList()).size();</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">			if (countDnaMutant &gt; 1)</span>
+<span class="nc" id="L77">				return true;</span>
+
+<span class="fc" id="L79">			countDnaMutant += GetWordsDiagonalTopLeftRight(dna).stream().filter(word -&gt; word.contains(iteamDNA))</span>
+<span class="fc" id="L80">					.collect(Collectors.toList()).size();</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">			if (countDnaMutant &gt; 1)</span>
+<span class="nc" id="L82">				return true;</span>
+
+<span class="fc" id="L84">			countDnaMutant += GetWordsDiagonalBottomLeftRight(dna).stream().filter(word -&gt; word.contains(iteamDNA))</span>
+<span class="fc" id="L85">					.collect(Collectors.toList()).size();</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">			if (countDnaMutant &gt; 1)</span>
+<span class="fc" id="L87">				return true;</span>
+
+<span class="fc" id="L89">		}</span>
+
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">		return countDnaMutant &gt; 1;</span>
+	}
+
+	private List&lt;String&gt; GetWordsVertical(String[] dna) {
+
+<span class="fc" id="L96">		List&lt;String&gt; wordsVertical = new ArrayList&lt;String&gt;();</span>
+
+<span class="fc bfc" id="L98" title="All 2 branches covered.">		for (int row = 0; row &lt; dna.length; row++) {</span>
+
+<span class="fc" id="L100">			StringBuilder word = new StringBuilder(dna.length);</span>
+
+<span class="fc bfc" id="L102" title="All 2 branches covered.">			for (int column = 0; column &lt; dna.length; column++) {</span>
+<span class="fc" id="L103">				word.append(dna[column].charAt(row));</span>
+			}
+
+<span class="fc" id="L106">			wordsVertical.add(word.toString());</span>
+		}
+<span class="fc" id="L108">		return wordsVertical;</span>
+
+	}
+
+	private List&lt;String&gt; GetWordsDiagonalTopLeftRight(String[] dna) {
+
+<span class="fc" id="L114">		List&lt;String&gt; wordsDiagonal = new ArrayList&lt;String&gt;();</span>
+
+<span class="fc bfc" id="L116" title="All 2 branches covered.">		for (int i = 0; i &lt; dna.length; i++) {</span>
+<span class="fc" id="L117">			StringBuilder wordOblique1 = new StringBuilder(dna.length);</span>
+<span class="fc" id="L118">			StringBuilder wordOblique2 = new StringBuilder(dna.length);</span>
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">			for (int j = 0; j &lt; dna.length - i; j++) {</span>
+<span class="fc" id="L121">				wordOblique1.append(dna[j].charAt(j + i));</span>
+
+<span class="fc bfc" id="L123" title="All 2 branches covered.">				if (i != 0) {</span>
+<span class="fc" id="L124">					wordOblique2.append(dna[i + j].charAt(j));</span>
+				}
+			}
+
+<span class="pc bpc" id="L128" title="1 of 4 branches missed.">			if (wordOblique1.toString().length() &gt; 3 || wordOblique2.toString().length() &gt; 3) {</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">				if (wordOblique1.length() &gt; 0) {</span>
+<span class="fc" id="L130">					wordsDiagonal.add(wordOblique1.toString());</span>
+				}
+
+<span class="fc bfc" id="L133" title="All 2 branches covered.">				if (wordOblique2.length() &gt; 0) {</span>
+<span class="fc" id="L134">					wordsDiagonal.add(wordOblique2.toString());</span>
+				}
+			}
+
+		}
+<span class="fc" id="L139">		return wordsDiagonal;</span>
+
+	}
+
+	private List&lt;String&gt; GetWordsDiagonalBottomLeftRight(String[] dna) {
+
+<span class="fc" id="L145">		List&lt;String&gt; wordsDiagonal = new ArrayList&lt;String&gt;();</span>
+
+<span class="fc bfc" id="L147" title="All 2 branches covered.">		for (int i = 0; i &lt; dna.length; i++) {</span>
+<span class="fc" id="L148">			StringBuilder wordOblique1 = new StringBuilder(dna.length);</span>
+<span class="fc" id="L149">			StringBuilder wordOblique2 = new StringBuilder(dna.length);</span>
+
+<span class="fc bfc" id="L151" title="All 2 branches covered.">			for (int j = dna.length - 1; j &gt;= i; j--) {</span>
+<span class="fc" id="L152">				wordOblique1.append(dna[j].charAt(i + dna.length - 1 - j));</span>
+
+<span class="fc bfc" id="L154" title="All 2 branches covered.">				if (i != 0) {</span>
+<span class="fc" id="L155">					wordOblique2.append(dna[j - 1].charAt(dna.length - 1 - j));</span>
+				}
+			}
+
+<span class="pc bpc" id="L159" title="1 of 4 branches missed.">			if (wordOblique1.toString().length() &gt; 3 || wordOblique2.toString().length() &gt; 3) {</span>
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">				if (wordOblique1.length() &gt; 0) {</span>
+<span class="fc" id="L161">					wordsDiagonal.add(wordOblique1.toString());</span>
+				}
+
+<span class="fc bfc" id="L164" title="All 2 branches covered.">				if (wordOblique2.length() &gt; 0) {</span>
+<span class="fc" id="L165">					wordsDiagonal.add(wordOblique2.toString());</span>
+				}
+			}
+
+		}
+<span class="fc" id="L170">		return wordsDiagonal;</span>
+
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
